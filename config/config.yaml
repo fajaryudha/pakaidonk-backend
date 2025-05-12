@@ -1,0 +1,14 @@
+message_broker:
+  type: rabbitmq # Bisa diganti dengan kafka
+  rabbitmq:
+    url: amqp://guest:guest@localhost:5672/
+    queue_name: inquiry_queue
+mysql:
+  user: "root"
+  password: "password"
+  dbname: "pakaidonk"
+  host: "localhost"
+  port: 3306
+jwt:
+  issuer: "pakaidonk"
+  ttl_minutes: 60
