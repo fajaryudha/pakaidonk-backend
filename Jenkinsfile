@@ -1,20 +1,34 @@
 pipeline {
-    agent {
-        docker {
-            image 'golang:1.24.3-alpine'
-        }
-    }
+    agent any
     
     stages {
         stage('Build') {
             steps {
+                // Checkout code
+                checkout scm
+                
+                // Check if Go is installed
                 sh '''
-                    # Install git (required for go mod download)
-                    apk add --no-cache git
+                    echo "Checking for Go installation..."
+                    if ! command -v go &> /dev/null; then
+                        echo "ERROR: Go is not installed or not in PATH"
+                        echo "Please install Go on the Jenkins agent"
+                        exit 1
+                    fi
                     
-                    # Build the Go application
+                    echo "Go version:"
+                    go version
+                    
+                    echo "Setting up Go environment..."
+                    export GO111MODULE=on
+                    
+                    echo "Downloading dependencies..."
                     go mod download
+                    
+                    echo "Building application..."
                     go build -v -o pakaidonk-backend .
+                    
+                    echo "Build completed successfully!"
                 '''
             }
         }
@@ -26,6 +40,7 @@ pipeline {
         }
         failure {
             echo 'Build failed!'
+            echo 'Please ensure Go is installed on the Jenkins agent'
         }
     }
 }
