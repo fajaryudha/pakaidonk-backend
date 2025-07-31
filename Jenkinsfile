@@ -17,11 +17,11 @@ pipeline {
         APP_NAME = 'pakaidonk-backend'
         DOCKER_HUB_USERNAME = 'fajaryudha' // Ganti dengan username Docker Hub Anda
         DOCKER_HUB_REPO_NAME = 'pakaidonk-backend'
-        DOCKER_HUB_CREDENTIALS_ID = 'fcbca270-544e-42e7-a52b-3e61253b2a10' // Ganti dengan ID kredensial Docker Hub Anda di Jenkins
+        DOCKER_HUB_CREDENTIALS_ID = 'edca0204-ce14-435c-a4a2-e43193b58266' // Ganti dengan ID kredensial Docker Hub Anda di Jenkins
         
         SSH_HOST = '8.215.8.98' // Ganti dengan host SSH Anda
         SSH_USERNAME = 'admin' // Ganti dengan username SSH Anda
-        SSH_CREDENTIALS_ID = 'SSH' // Ganti dengan ID kredensial SSH Anda di Jenkins
+        SSH_CREDENTIALS_ID = 'ca548c00-3d26-4aba-843e-616f945b0173' // Ganti dengan ID kredensial SSH Anda di Jenkins
         
         APP_VERSION = "1.0" // Menggunakan BUILD_NUMBER sebagai versi aplikasi
         // Pastikan Anda sudah membuat credentials di Jenkins (tipe Username & password untuk Docker Hub, SSH Username with private key untuk SSH)
