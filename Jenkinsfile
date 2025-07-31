@@ -1,34 +1,21 @@
 pipeline {
-    agent any
-    
-    environment {
-        GO_VERSION = '1.24.3'
+    agent {
+        docker {
+            image 'golang:1.24.3-alpine'
+        }
     }
     
     stages {
-        stage('Checkout SCM') {
-            steps {
-                checkout scm
-            }
-        }
-        
-        stage('Setup Go Environment') {
-            steps {
-                sh 'go version'
-                sh 'export GO111MODULE=on'
-            }
-        }
-        
-        stage('Download Dependencies') {
-            steps {
-                sh 'go mod download'
-                sh 'go mod verify'
-            }
-        }
-        
         stage('Build') {
             steps {
-                sh 'go build -v -o pakaidonk-backend .'
+                sh '''
+                    # Install git (required for go mod download)
+                    apk add --no-cache git
+                    
+                    # Build the Go application
+                    go mod download
+                    go build -v -o pakaidonk-backend .
+                '''
             }
         }
     }
